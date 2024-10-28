@@ -18,7 +18,6 @@ import java.util.List;
 public class FolderController {
 
     private final FolderService folderService;
-    private final ProductService productService;
 
     @PostMapping("/folders")
     public void addFolders(@RequestBody FolderRequestDto folderRequestDto,
