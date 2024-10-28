@@ -32,11 +32,4 @@ public class FolderController {
         return folderService.getFolders(userDetails.getUser());
     }
 
-    // 상품을 폴더에 추가
-    @PostMapping("/products/{productId}/folder")
-    public void addFolder(@PathVariable Long productId,
-                          @RequestParam Long folderId,
-                          @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        productService.addFolder(productId, folderId, userDetails.getUser());
-    }
 }
