@@ -2,7 +2,6 @@ package com.sparta.myselectshop.naver.service;
 
 
 import com.sparta.myselectshop.naver.dto.ItemDto;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -52,18 +51,17 @@ public class NaverApiService {
         return fromJSONtoItems(responseEntity.getBody());
     }
 
-    @SneakyThrows
     public List<ItemDto> fromJSONtoItems(String responseEntity) {
         JSONObject jsonObject = new JSONObject(responseEntity);
         JSONArray items  = jsonObject.getJSONArray("items");
         List<ItemDto> itemDtoList = new ArrayList<>();
 
-        for (int i = 0; i < items.length(); i++) {
-            JSONObject item = items.getJSONObject(i); // JSONArray에서 JSONObject 가져오기
-            ItemDto itemDto = new ItemDto(item);
+        for (Object item : items) {
+            ItemDto itemDto = new ItemDto((JSONObject) item);
             itemDtoList.add(itemDto);
         }
 
         return itemDtoList;
     }
 }
+
