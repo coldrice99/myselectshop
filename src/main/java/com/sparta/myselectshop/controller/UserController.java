@@ -80,7 +80,9 @@ public class UserController {
     }
 
 
-    /* 직접 쿠키를 만들어서 set
+    /*
+       카카오 사용자 정보 가져오기 API :
+       직접 쿠키를 만들어서 set
        카카오 서버에서 넘어오는 인가 코드를 @RequestParam으로 받는다.
        이전 회원 기능을 구현할 떄는 헤더에 jwt를 넣었는데 이번 클라이언트 구조상 직접 쿠키를 생성해서
        jwt를 넣은 다음에 브라우저에 자동으로 set 될 수 있게 구현 (HttpServlet)
@@ -90,7 +92,7 @@ public class UserController {
         // jwt 토큰
         String token = kakaoService.kakaoLogin(code);
 
-        Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, token);
+        Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, token.substring(7)); // bearer을 제외한 순수 토큰
         cookie.setPath("/");
         response.addCookie(cookie); // 브라우저의 jwt 값이 set
 
